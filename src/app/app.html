@@ -1,0 +1,297 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<style>
+  /* Import nice display and UI fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700&display=swap');
+
+  :host{
+    --bg-gradient: linear-gradient(180deg,#f7ecff,#f3e8ff);
+    --bg-heart-color: #d9b3ff;
+    --panel:#fffefb;
+    --accent:#b98cff;
+    --text:#2b2b2b;
+    --muted:#6b6b6b;
+    --shadow: 0 18px 48px rgba(28,20,30,0.08);
+    font-family: 'Poppins', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial;
+  }
+
+  html,body{height:100%;margin:0;background:var(--bg-gradient)}
+
+  /* soft pastel purple page background with repeating heart pattern */
+  main{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:clamp(1rem,4vw,2.5rem);background-color:transparent;background-image:
+    radial-gradient(380px 180px at 10% 10%, rgba(185,140,255,0.06), transparent),
+    radial-gradient(380px 180px at 90% 90%, rgba(255,160,160,0.04), transparent),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23d9b3ff" fill-opacity="0.12" d="M12 21s-6.716-4.743-9-7.028C-0.286 10.657 2.91 5 7.5 5 9.75 5 12 6.5 12 6.5s2.25-1.5 4.5-1.5C21.09 5 24.286 10.657 21 13.972 18.716 16.257 12 21 12 21z"/></svg>');
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: cover, cover, 140px 140px;
+  }
+
+  /* Title / header styling with decorative display font and subtle shimmer */
+  .app-title{
+    margin:0 0 clamp(0.5rem,2vw,1rem) 0;color:var(--text);font-size:clamp(1.5rem,5vw,2.2rem);font-family:'Playfair Display', serif;font-weight:700;letter-spacing:0.6px;
+    background:linear-gradient(90deg,#7b5cff,#ff8ab3);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 6px 22px rgba(123,92,255,0.08);
+    animation:shimmer 6s linear infinite;
+  }
+
+  @keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  /* Card area */
+  
+
+  .container{width:min(1100px,96%);display:flex;flex-direction:column;gap:0.5rem;align-items:center}
+  .app-title{margin:0;color:var(--text);font-size:1.6rem}
+
+  /* Card area */
+  .card-wrap{display:flex;gap:1.5rem;align-items:flex-start}
+
+  .quiz-card{
+    width:min(640px,95%);
+    padding:clamp(1.4rem,4vw,2rem) clamp(1.2rem,3.5vw,1.8rem);
+    border-radius:clamp(16px,3vw,22px);
+    background: linear-gradient(180deg,var(--panel),#fff);
+    box-shadow: 0 28px 72px rgba(28,20,30,0.12);
+    border:1px solid rgba(0,0,0,0.05);
+    color:var(--text);
+    display:flex;flex-direction:column;gap:clamp(0.8rem,2vw,1rem);position:relative;overflow:hidden
+  }
+
+  /* decorative ribbon */
+  .quiz-card::before{
+    content:'';position:absolute;left:-90px;top:-70px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(185,140,255,0.14), transparent 40%);
+    transform:rotate(12deg);pointer-events:none
+  }
+
+  .quiz-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+  .quiz-header h2{margin:0;font-size:clamp(1.05rem,3vw,1.3rem);font-family:'Playfair Display', serif;font-weight:700;letter-spacing:0.4px;color:var(--text);}
+  .progress{color:var(--muted);font-size:clamp(0.8rem,2vw,0.9rem);white-space:nowrap}
+
+  .question{margin:0;font-weight:700;font-size:clamp(1.08rem,3.2vw,1.24rem);color:var(--text);letter-spacing:0.2px;text-shadow:0 6px 26px rgba(43,43,43,0.05);line-height:1.4}
+
+  .options{display:flex;flex-direction:column;gap:clamp(0.5rem,1.5vw,0.6rem)}
+  .opt{background:#ffffff;border:1px solid rgba(0,0,0,0.04);padding:clamp(0.9rem,2.5vw,1.05rem) clamp(1rem,2.8vw,1.1rem);border-radius:clamp(12px,2.5vw,14px);text-align:left;cursor:pointer;transition:transform .14s cubic-bezier(.2,.9,.3,1),box-shadow .14s ease;font-weight:700;color:var(--text);font-size:clamp(0.95rem,2.5vw,1.02rem);min-height:52px;display:flex;align-items:center}
+  .opt:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 22px 48px rgba(28,20,30,0.08)}
+  .opt:active{transform:translateY(-2px) scale(.995)}
+  @media(hover:none){.opt:hover{transform:none}}
+
+  /* pastel accents for options */
+  .options button:nth-child(1){background:linear-gradient(90deg,#fff0f6,#fff)}
+  .options button:nth-child(2){background:linear-gradient(90deg,#f0fbff,#fff)}
+  .options button:nth-child(3){background:linear-gradient(90deg,#f0fff4,#fff)}
+  .options button:nth-child(4){background:linear-gradient(90deg,#fff7ec,#fff)}
+
+  .opt.selected{outline:3px solid rgba(185,140,255,0.16);box-shadow:0 12px 34px rgba(185,140,255,0.08)}
+
+  .quiz-result{text-align:center}
+  .prize{margin-top:0.5rem;font-weight:800;color:#ff8aa0;font-size:clamp(0.95rem,2.5vw,1.05rem)}
+  .prize-section{margin-top:1rem}
+  .prize-teaser{font-size:clamp(1rem,2.8vw,1.1rem);font-weight:700;color:#b98cff;margin-bottom:1rem;line-height:1.3}
+  .reveal-btn{background:linear-gradient(135deg,#ffd700,#ffed4e);color:#2b2b2b;padding:clamp(0.9rem,2.5vw,1rem) clamp(1.5rem,4vw,2rem);border-radius:clamp(14px,3vw,16px);border:0;cursor:pointer;font-weight:800;font-size:clamp(1rem,2.8vw,1.1rem);box-shadow:0 8px 24px rgba(255,215,0,0.3);transition:transform .2s ease,box-shadow .2s ease;margin-top:0.5rem;min-height:52px;width:100%;max-width:320px}
+  .reveal-btn:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 36px rgba(255,215,0,0.4)}
+  .reveal-btn:active{transform:translateY(-2px) scale(1.02)}
+  @media(hover:none){.reveal-btn:hover{transform:none}}
+
+  .restart{background:linear-gradient(90deg,#b98cff,#ff9fb1);color:white;padding:clamp(0.8rem,2vw,0.9rem) clamp(1rem,2.5vw,1.2rem);border-radius:clamp(12px,2.5vw,14px);border:0;cursor:pointer;font-weight:800;font-size:clamp(0.95rem,2.5vw,1.05rem);min-height:48px;width:100%;max-width:280px}
+
+  /* Modal styles */
+  .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:1000;animation:fadeIn .3s ease;padding:clamp(0.5rem,2vw,1rem)}
+  .modal-content{background:linear-gradient(180deg,#fffefb,#fff);border-radius:clamp(18px,4vw,24px);padding:clamp(1.2rem,3.5vw,2rem);max-width:min(500px,95%);width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 32px 96px rgba(28,20,30,0.2);position:relative;animation:slideUp .4s cubic-bezier(.2,.9,.3,1)}
+  .modal-close{position:absolute;top:clamp(0.8rem,2vw,1rem);right:clamp(0.8rem,2vw,1rem);background:transparent;border:0;font-size:clamp(1.3rem,3vw,1.5rem);color:var(--muted);cursor:pointer;width:clamp(28px,6vw,32px);height:clamp(28px,6vw,32px);display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease;z-index:1}
+  .modal-close:hover{background:rgba(0,0,0,0.06)}
+  @media(hover:none){.modal-close:hover{background:transparent}}
+  
+  .modal-header{text-align:center;margin-bottom:clamp(1rem,3vw,1.5rem)}
+  .modal-header h2{margin:0 0 clamp(0.4rem,1.5vw,0.5rem) 0;font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4.5vw,2rem);background:linear-gradient(90deg,#b98cff,#ff8aa0);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.2}
+  .modal-subtitle{color:var(--muted);font-size:clamp(0.9rem,2.2vw,1rem);margin:0;line-height:1.4}
+  
+  .modal-body{display:flex;flex-direction:column;gap:clamp(1rem,3vw,1.5rem)}
+  .prize-announcement{text-align:center;padding:clamp(1.2rem,3vw,1.5rem);background:linear-gradient(135deg,#fff0f6,#f0fbff);border-radius:clamp(14px,3vw,18px)}
+  .prize-icon{font-size:clamp(2.8rem,8vw,4rem);margin-bottom:clamp(0.4rem,1.5vw,0.5rem);line-height:1}
+  .prize-announcement h3{margin:0 0 clamp(0.4rem,1.5vw,0.5rem) 0;font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3.5vw,1.5rem);color:var(--text);line-height:1.3}
+  .prize-announcement p{margin:0;color:var(--muted);font-size:clamp(0.9rem,2.2vw,1rem);line-height:1.4}
+  
+  .restaurant-suggestions h4{margin:0 0 clamp(0.8rem,2.5vw,1rem) 0;font-family:'Playfair Display',serif;color:var(--text);font-size:clamp(1rem,2.8vw,1.2rem);line-height:1.3}
+  .restaurant-list{display:flex;flex-direction:column;gap:clamp(0.6rem,1.8vw,0.8rem)}
+  .restaurant-item{display:flex;gap:clamp(0.8rem,2.5vw,1rem);padding:clamp(0.8rem,2.5vw,1rem);background:#fff;border-radius:clamp(10px,2.5vw,12px);border:1px solid rgba(0,0,0,0.04);transition:transform .2s ease,box-shadow .2s ease;min-height:64px;align-items:center}
+  .restaurant-item:hover{transform:translateX(4px);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+  @media(hover:none){.restaurant-item:hover{transform:none}}
+  .restaurant-icon{font-size:clamp(1.5rem,4vw,1.8rem);flex-shrink:0;line-height:1}
+  .restaurant-info{flex:1;min-width:0}
+  .restaurant-info strong{display:block;font-size:clamp(0.95rem,2.5vw,1rem);color:var(--text);margin-bottom:clamp(0.2rem,0.8vw,0.3rem);line-height:1.3}
+  .restaurant-info p{margin:0;font-size:clamp(0.8rem,2vw,0.85rem);color:var(--muted);line-height:1.4}
+  
+  .modal-action-btn{background:linear-gradient(90deg,#b98cff,#ff9fb1);color:white;padding:clamp(0.9rem,2.5vw,1rem) clamp(1.2rem,3vw,1.5rem);border-radius:clamp(12px,2.5vw,14px);border:0;cursor:pointer;font-weight:800;font-size:clamp(1rem,2.5vw,1.05rem);width:100%;transition:transform .2s ease,box-shadow .2s ease;min-height:52px}
+  .modal-action-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(185,140,255,0.3)}
+  @media(hover:none){.modal-action-btn:hover{transform:none}}
+
+  /* Instructions modal specific styles */
+  .instructions-modal{max-width:min(540px,95%)}
+  .instructions-section{display:flex;flex-direction:column;gap:clamp(1rem,2.5vw,1.2rem)}
+  .instruction-item{display:flex;gap:clamp(1rem,2.5vw,1.2rem);padding:clamp(1rem,2.5vw,1.2rem);background:#fff;border-radius:clamp(12px,2.5vw,14px);border:1px solid rgba(0,0,0,0.04);align-items:flex-start}
+  .instruction-item.highlight{background:linear-gradient(135deg,#fff0f6,#f0fbff);border:2px solid rgba(185,140,255,0.2)}
+  .instruction-icon{font-size:clamp(2rem,5vw,2.5rem);flex-shrink:0;line-height:1}
+  .instruction-text{flex:1;min-width:0}
+  .instruction-text h4{margin:0 0 clamp(0.3rem,1vw,0.4rem) 0;font-size:clamp(1rem,2.5vw,1.1rem);color:var(--text);font-family:'Poppins',sans-serif;font-weight:700;line-height:1.3}
+  .instruction-text p{margin:0;font-size:clamp(0.9rem,2.2vw,0.95rem);color:var(--muted);line-height:1.5}
+  .instruction-text p strong{color:var(--accent);font-weight:700}
+  .start-btn{background:linear-gradient(135deg,#ffd700,#ffed4e)!important;color:#2b2b2b!important;box-shadow:0 8px 24px rgba(255,215,0,0.3);margin-top:clamp(0.5rem,1.5vw,0.8rem)}
+  .start-btn:hover{box-shadow:0 12px 36px rgba(255,215,0,0.4)}
+
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Responsive rules have been moved to src/app/app.css */
+
+</style>
+
+  <main>
+    <div class="container">
+      <h1 class="app-title">Quiz sorpresa — Aniversario</h1>
+
+      <div class="card-wrap">
+        <div class="quiz-card" role="group" aria-label="Quiz sorpresa">
+          <div class="quiz-header">
+            <h2>Aniversario Quiz</h2>
+            <div class="progress">Pregunta {{ current() + 1 }} / {{ questions.length }}</div>
+          </div>
+
+          <div *ngIf="current() < questions.length" class="quiz-body">
+            <p class="question">{{ questions[current()].question }}</p>
+            <div class="options">
+              <button
+                class="opt"
+                *ngFor="let opt of questions[current()].options; let i = index"
+                (click)="selectOption(i)"
+                [class.selected]="answered()[current()] === i"
+              >
+                {{ opt }}
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="current() === questions.length" class="quiz-result">
+            <h3>Resultados</h3>
+            <p>Has acertado <strong>{{ score() }}</strong> de <strong>{{ questions.length }}</strong> preguntas.</p>
+            <p>Puntuación: <strong>{{ percent }}%</strong></p>
+            
+            <div *ngIf="percent >= 75" class="prize-section">
+              <p class="prize-teaser">¡Felicidades! Has ganado un premio especial ✨</p>
+              <button class="reveal-btn" (click)="revealPrize()">🎁 Revelar Premio</button>
+            </div>
+            <div class="prize" *ngIf="percent < 75">¡Bien jugado! Tal vez la próxima vez.</div>
+            
+            <div style="margin-top:0.8rem;">
+              <button class="restart" (click)="restart()">Volver a intentarlo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Instructions modal (shows on page load) -->
+  <div *ngIf="showInstructions()" class="modal-overlay" (click)="closeInstructions()">
+    <div class="modal-content instructions-modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeInstructions()">✕</button>
+      
+      <div class="modal-header">
+        <h2>🎊 Quiz de Aniversario 🎊</h2>
+        <p class="modal-subtitle">¡Pon a prueba cuánto nos conocemos!</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="instructions-section">
+          <div class="instruction-item">
+            <span class="instruction-icon">❓</span>
+            <div class="instruction-text">
+              <h4>Responde las preguntas</h4>
+              <p>Te haré {{ questions.length }} preguntas sobre nosotros. Lee con atención y elige la respuesta correcta.</p>
+            </div>
+          </div>
+
+          <div class="instruction-item">
+            <span class="instruction-icon">✅</span>
+            <div class="instruction-text">
+              <h4>Cada pregunta tiene 3-4 opciones</h4>
+              <p>Haz clic en la respuesta que creas correcta. Una vez seleccionada, avanzarás automáticamente.</p>
+            </div>
+          </div>
+
+          <div class="instruction-item highlight">
+            <span class="instruction-icon">🎁</span>
+            <div class="instruction-text">
+              <h4>¡Consigue el 75% o más para ganar!</h4>
+              <p>Si aciertas al menos el <strong>75% de las preguntas</strong>, desbloquearás un premio especial: ¡una cena romántica de aniversario! 🍽️❤️</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="modal-action-btn start-btn" (click)="closeInstructions()">
+          ¡Empezar el Quiz! 💕
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prize reveal modal -->
+  <div *ngIf="showPrizeModal()" class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()">✕</button>
+      
+      <div class="modal-header">
+        <h2>🎉 ¡Felicidades! 🎉</h2>
+        <p class="modal-subtitle">Has ganado el premio especial</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="prize-announcement">
+          <div class="prize-icon">🍽️</div>
+          <h3>Cena Romántica de Aniversario</h3>
+          <p>Una velada inolvidable para celebrar nuestro amor ❤️</p>
+        </div>
+
+        <div class="restaurant-suggestions">
+          <h4>Sugerencias de restaurantes:</h4>
+          <div class="restaurant-list">
+            <div class="restaurant-item">
+              <span class="restaurant-icon">👴</span>
+              <div class="restaurant-info">
+                <strong>Figón de Eustaquio</strong>
+                <p>Recomendación de mi abuelo</p>
+              </div>
+            </div>
+            <div class="restaurant-item">
+              <span class="restaurant-icon">🍽️</span>
+              <div class="restaurant-info">
+                <strong>Tápara</strong>
+                <p>Cocina mediterránea y ambiente especial</p>
+              </div>
+            </div>
+            <div class="restaurant-item">
+              <span class="restaurant-icon">✨</span>
+              <div class="restaurant-info">
+                <strong>La Fabiola</strong>
+                <p>Elegancia y sabor en cada plato</p>
+              </div>
+            </div>
+            <div class="restaurant-item">
+              <span class="restaurant-icon">🌿</span>
+              <div class="restaurant-info">
+                <strong>Mana</strong>
+                <p>Experiencia gastronómica única</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="modal-action-btn" (click)="closeModal()">¡Perfecto! 💕</button>
+      </div>
+    </div>
+  </div>
+
+  <router-outlet />

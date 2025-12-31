@@ -1,0 +1,111 @@
+/* Responsive styles - optimized with modern approaches
+   Using clamp() and fluid typography for better scaling across all devices
+*/
+
+/* Ensure quiz body and options expand to fill the card height */
+.quiz-card{display:flex;flex-direction:column}
+.quiz-body{display:flex;flex-direction:column;flex:1;min-height:0}
+.options{display:flex;flex-direction:column;gap:clamp(0.5rem,1.5vw,0.6rem);flex:1;min-height:0}
+.opt{flex:1;display:flex;align-items:center;justify-content:flex-start;width:100%;min-height:52px}
+.question{margin-bottom:clamp(0.5rem,1.5vw,0.8rem)}
+
+/* Large screens - subtle adjustments */
+@media (min-width:1400px){
+  .quiz-card{width:700px}
+}
+
+/* Desktop intermediate (1100px to 880px) */
+@media (max-width:1100px){
+  .quiz-card{width:90%;min-height:500px;padding:clamp(1.6rem,3vw,2rem) clamp(1.4rem,2.8vw,1.8rem)}
+}
+
+/* Tablet / small laptop (880px and below) */
+@media (max-width:880px){
+  .card-wrap{flex-direction:column;align-items:center}
+  .quiz-card{width:94%;min-height:580px;padding:clamp(1.5rem,3vw,2rem) clamp(1.3rem,2.8vw,1.6rem)}
+  
+  /* Options stretch to fill space on tablets */
+  .options{flex:1;gap:clamp(0.6rem,1.5vw,0.7rem)}
+  .opt{flex:1;min-height:56px}
+}
+
+/* Large mobile / small tablets (600px to 480px) */
+@media (max-width:600px){
+  html,body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+  
+  .container{width:100%;padding:0 clamp(12px,3vw,16px)}
+  .quiz-card{width:96%;min-height:680px;padding:clamp(1.3rem,3vw,1.6rem) clamp(1.1rem,2.5vw,1.3rem)}
+  .quiz-card::before{left:-50px;top:-50px;width:200px;height:200px}
+  
+  /* Reduce background heart density */
+  main{background-size:cover,cover,120px 120px;padding:clamp(0.8rem,3vw,1.5rem)}
+  
+  /* Increase vertical spacing for options */
+  .options{gap:clamp(0.6rem,1.8vw,0.8rem);margin-top:clamp(0.6rem,2vw,1rem)}
+  .opt{min-height:58px;padding-top:clamp(1rem,2.5vw,1.3rem);padding-bottom:clamp(1rem,2.5vw,1.3rem)}
+}
+
+/* Small mobile phones (480px and below) - iPhone 14 Pro Max and similar */
+@media (max-width:480px){
+  .quiz-card{min-height:740px;width:calc(100% - 24px)}
+  .quiz-card::before{left:-40px;top:-40px;width:180px;height:180px}
+  
+  /* Further reduce heart pattern on very small screens */
+  main{background-size:cover,cover,100px 100px}
+  
+  /* Optimize touch targets and spacing */
+  .options{gap:clamp(0.65rem,2vw,0.75rem);margin-top:clamp(0.8rem,2.5vw,1.2rem)}
+  .opt{min-height:60px}
+}
+
+/* Extra small devices and very narrow screens (360px and below) */
+@media (max-width:360px){
+  .quiz-card{min-height:680px;padding:clamp(1.1rem,3vw,1.3rem) clamp(1rem,2.5vw,1.1rem)}
+  main{background-size:cover,cover,80px 80px;padding:clamp(0.6rem,2vw,1rem)}
+  .opt{min-height:56px;font-size:clamp(0.9rem,2.8vw,1rem)}
+}
+
+/* Landscape orientation - optimize for horizontal space */
+@media (max-height:500px) and (orientation:landscape){
+  main{padding:clamp(0.5rem,2vh,1rem)}
+  .quiz-card{min-height:auto;max-height:90vh;overflow-y:auto;padding:clamp(1rem,2vh,1.5rem)}
+  .app-title{font-size:clamp(1.2rem,3vh,1.6rem);margin-bottom:clamp(0.3rem,1vh,0.6rem)}
+  .options{gap:clamp(0.4rem,1vh,0.6rem)}
+  .opt{min-height:44px;padding:clamp(0.6rem,1.5vh,0.8rem) clamp(0.8rem,2vw,1rem)}
+}
+
+/* High DPI / Retina displays - sharpen text rendering */
+@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  .opt,.question,.quiz-header h2{text-rendering:optimizeLegibility}
+}
+
+/* Modal responsive enhancements - consolidated and optimized */
+@media (max-width:600px){
+  .modal-overlay{padding:clamp(1rem,3vw,1.5rem);align-items:center}
+  .modal-content{max-width:100%;max-height:88vh;max-height:88dvh;margin-bottom:env(safe-area-inset-bottom)}
+  
+  /* Optimize restaurant items for mobile */
+  .restaurant-item{min-height:68px;padding:clamp(0.9rem,2.5vw,1rem)}
+  .restaurant-icon{font-size:clamp(1.6rem,4.5vw,1.8rem)}
+}
+
+@media (max-width:480px){
+  .modal-overlay{padding:clamp(1rem,3vw,1.2rem)}
+  .modal-content{padding:clamp(1rem,3vw,1.2rem);max-height:86vh;max-height:86dvh}
+  .prize-announcement{padding:clamp(1rem,3vw,1.2rem)}
+  .restaurant-list{gap:clamp(0.65rem,2vw,0.8rem)}
+  .modal-action-btn{min-height:54px}
+}
+
+@media (max-width:360px){
+  .modal-overlay{align-items:center;padding:clamp(0.8rem,2.5vw,1rem)}
+  .modal-content{padding:clamp(0.9rem,2.5vw,1rem);max-height:84vh;max-height:84dvh}
+  .restaurant-item{min-height:64px;padding:clamp(0.75rem,2vw,0.9rem);gap:clamp(0.7rem,2vw,0.8rem)}
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion:reduce){
+  *,::before,::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+  .modal-overlay,.modal-content{animation:none}
+}
